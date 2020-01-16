@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+
+<body>
+
+    <div id="app">
+        <button id="button">Criar Quadrado</button>
+        <div id="boxes"></div>
+    </div>
+
+    <script>
+        var btn = document.querySelector("#button");
+        btn.onclick = function createBox() {
+            var box = document.createElement('div');
+            box.style.width = "100px";
+            box.style.height = "100px";
+            box.style.background = "red";
+            box.style.float = "left";
+
+            var boxes = document.querySelector("#boxes");
+            boxes.style.display = "grid";
+            boxes.style.gridTemplateColumns = "100px 100px 100px 100px 100px";
+            boxes.style.gridGap = "5px";
+            boxes.appendChild(box);
+        };
+
+    </script>
+</body>
+
+</html>
