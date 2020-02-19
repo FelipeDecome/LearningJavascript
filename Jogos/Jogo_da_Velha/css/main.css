@@ -12,6 +12,20 @@
   align-items: center;
   flex-direction: column;
   height: 100vh;
+  background-color: rgba(0, 102, 140, 0.2);
+}
+
+.stats {
+  padding: 10px 30px;
+  margin-bottom: 5px;
+  background: #333;
+  font-weight: bold;
+}
+.stats span#player1 {
+  color: #fff138;
+}
+.stats span#player0 {
+  color: cyan;
 }
 
 .row ul {
@@ -27,14 +41,15 @@
   height: 80px;
   border: 1px solid #999;
   font-size: 28px;
-  text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
-  background: #404040;
-}
-.row ul li.item.iconO {
-  color: cyan;
+  color: #fff;
+  text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  background: #777;
 }
 .row ul li.item.iconX {
   color: #fff138;
+}
+.row ul li.item.iconO {
+  color: cyan;
 }
 
 .row:first-child ul li:first-child {
