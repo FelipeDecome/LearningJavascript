@@ -3,13 +3,23 @@ const Xicon = "<i class='fas fa-times'></i>";
 const Oicon = "<i class='fas fa-circle'></i>";
 
 let grid = [
-  [0, 0, 0], // y
-  [0, 0, 0], // y
-  [0, 0, 0] // y
+  [null, null, null], // y
+  [null, null, null], // y
+  [null, null, null] // y
   // x  x  x
 ];
 
+let gameState = [
+  grid => [
+    [null, null, null],
+    [null, null, null],
+    [null, null, null]
+  ]
+  // turn
+];
+
 function render(grid) {
+  wrapper.innerHTML = null;
   for (let l = 0; l < 3; l++) {
     let liRow = document.createElement("li");
     liRow.setAttribute("id", `row_${l}`);
@@ -26,8 +36,7 @@ function render(grid) {
         event.preventDefault(event);
 
         /* ! WHYYYYYYYYYYY */
-        grid[l][c] = 1;
-        render();
+        MarkField(l, c, 1);
       });
       if (grid[l][c] == 0) {
         liItem.classList.add("iconO");
@@ -45,3 +54,9 @@ function render(grid) {
 }
 
 render(grid);
+
+function MarkField(l, c, player) {
+  grid[l][c] = player;
+
+  render(grid);
+}
