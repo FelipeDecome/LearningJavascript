@@ -5,9 +5,9 @@ const iconO = "<i class='fas fa-circle'></i>";
 
 let gameState = {
   grid: [
-    ['', '', ''],
-    ['', '', ''],
-    ['', '', '']
+    [1, "", ""],
+    [1, "", ""],
+    [1, "", ""]
   ],
   playerTurn: 1,
   togglePlayerTurn() {
@@ -18,7 +18,7 @@ let gameState = {
     }
   },
   markField(l, c) {
-    if (this.grid[l][c] === '') {
+    if (this.grid[l][c] === "") {
       this.grid[l][c] = this.playerTurn;
 
       this.togglePlayerTurn();
@@ -26,10 +26,20 @@ let gameState = {
       render(this);
       this.verify();
       console.log(gameState);
-
     }
   },
   verify() {
+    if (verifyRow(this.grid)) {
+      alert("temos um vencedor");
+    }
+  },
+  resetGrid() {
+    for (let l = 0; l < this.grid.length; l++) {
+      for (let c = 0; c < this.grid[l].length; c++) {
+        this.grid[l][c] = "";
+      }
+    }
+    render(this.grid);
   }
 };
 
@@ -68,9 +78,9 @@ function render(gameState) {
     }
     wrapper.append(liRow);
   }
-  let spanStats = document.createElement('span');
-  spanStats.setAttribute('id', 'player' + gameState.playerTurn);
-  spanStats.innerText = 'Player ' + -(gameState.playerTurn - 2);
+  let spanStats = document.createElement("span");
+  spanStats.setAttribute("id", "player" + gameState.playerTurn);
+  spanStats.innerText = "Player " + -(gameState.playerTurn - 2);
 
   stats.append(spanStats);
 }
@@ -82,3 +92,29 @@ function MarkField(l, c, player) {
 
   render(grid);
 }
+
+function verifyRow(grid) {
+  // let total = [];
+  for (let l = 0; l < grid.length; l++) {
+    let soma = gameState.grid[l].reduce((total, itens) => total + itens, 0);
+    if (soma === 3) {
+      return true;
+    } else {
+      return false;
+    }
+    // total.push(soma);
+  }
+  // return total;
+}
+
+function verifyColumn(grid) {
+  let total = [];
+  for (let l = 0; l < grid.length; l++) {
+    for (let c = 0; c < grid[l].length; c++) {
+      total[l] += gameState.grid[c][l];
+    }
+  }
+  return total;
+}
+
+console.log(verifyColumn(gameState.grid));
