@@ -5,9 +5,9 @@ const iconO = "<i class='fas fa-circle'></i>";
 
 let gameState = {
   grid: [
-    [1, "", ""],
-    [1, "", ""],
-    [1, "", ""]
+    ['', '', ''],
+    ['', '', ''],
+    ['', '', '']
   ],
   playerTurn: 1,
   togglePlayerTurn() {
@@ -21,16 +21,21 @@ let gameState = {
     if (this.grid[l][c] === "") {
       this.grid[l][c] = this.playerTurn;
 
+      this.verify();
       this.togglePlayerTurn();
 
       render(this);
-      this.verify();
-      console.log(gameState);
     }
   },
   verify() {
-    if (verifyRow(this.grid)) {
-      alert("temos um vencedor");
+    if (verifyRow(this.grid) || verifyColumn(this.grid) || verifyDiag(this.grid)) {
+      velha.classList.add('winner');
+      let player = (this.playerTurn - 2) * (-1);
+      velha.classList.add('player' + player);
+      velha.setAttribute('data-content', 'Player ' + player + ' ganhou!');
+    } else if (verifyVelha(this.grid)) {
+      velha.classList.add('velha');
+      velha.setAttribute('data-content', 'Velha');
     }
   },
   resetGrid() {
@@ -39,82 +44,125 @@ let gameState = {
         this.grid[l][c] = "";
       }
     }
-    render(this.grid);
+
+    velha.classList.remove('winner');
+    velha.classList.remove('velha');
+    let player = (this.playerTurn - 2) * (-1);
+    velha.classList.remove('player' + player);
+    velha.setAttribute('data-content', '');
+
+    this.playerTurn = 1;
+
+    render(this);
   }
 };
 
 function render(gameState) {
-  wrapper.innerHTML = null;
-  stats.innerHTML = null;
-
-  for (let l = 0; l < gameState.grid.length; l++) {
-    let liRow = document.createElement("li");
-    liRow.setAttribute("id", `row_${l}`);
-    liRow.classList.add("row");
-
-    let ul = document.createElement("ul");
-
-    for (let c = 0; c < gameState.grid[l].length; c++) {
-      let liItem = document.createElement("li");
-      liItem.setAttribute("id", `item_${l}-${c}`);
-      liItem.classList.add("item");
-
-      liItem.addEventListener("click", event => {
-        event.preventDefault(event);
-
-        gameState.markField(l, c);
-        console.log(gameState);
-      });
-      if (gameState.grid[l][c] === 0) {
-        liItem.classList.add("iconO");
-        liItem.innerHTML = iconO;
-      } else if (gameState.grid[l][c] === 1) {
-        liItem.classList.add("iconX");
-        liItem.innerHTML = iconX;
-      }
-      ul.append(liItem);
-
-      liRow.append(ul);
-    }
-    wrapper.append(liRow);
-  }
-  let spanStats = document.createElement("span");
-  spanStats.setAttribute("id", "player" + gameState.playerTurn);
-  spanStats.innerText = "Player " + -(gameState.playerTurn - 2);
-
-  stats.append(spanStats);
+  renderGrid(gameState.grid);
+  statsPanelRender(gameState.playerTurn);
 }
 
 render(gameState);
 
-function MarkField(l, c, player) {
-  grid[l][c] = player;
+function renderGrid(grid) {
+  wrapper.innerHTML = null;
 
-  render(grid);
+  for (let l = 0; l < grid.length; l++) {
+    let liRow = document.createElement("li");
+    liRow.setAttribute("id", `row_${l}`);
+    liRow.classList.add("row");
+
+    let ul = createLiItemList(l, grid);
+
+    liRow.append(ul);
+
+    wrapper.append(liRow);
+  }
+}
+
+function statsPanelRender(playerTurn) {
+  stats.innerHTML = null;
+
+  let player = (playerTurn - 2) * (-1);
+  let spanStats = document.createElement("span");
+  spanStats.setAttribute("id", "player" + player);
+  spanStats.innerText = "Player " + player;
+
+  stats.append(spanStats);
 }
 
 function verifyRow(grid) {
-  // let total = [];
   for (let l = 0; l < grid.length; l++) {
     let soma = gameState.grid[l].reduce((total, itens) => total + itens, 0);
-    if (soma === 3) {
+    if (soma === 3 || soma === 0) {
       return true;
-    } else {
-      return false;
     }
-    // total.push(soma);
   }
-  // return total;
+  return false;
 }
 
 function verifyColumn(grid) {
-  let total = [];
   for (let l = 0; l < grid.length; l++) {
+    let soma = 0;
+
     for (let c = 0; c < grid[l].length; c++) {
-      total[l] += gameState.grid[c][l];
+      soma += gameState.grid[c][l];
+      console.log(soma);
+    }
+    if (soma === 3 || soma === 0) {
+      return true;
     }
   }
-  return total;
+  return false;
 }
 
-console.log(verifyColumn(gameState.grid));
+function verifyDiag(grid) {
+  let somaDiag1 = grid[0][0] + grid[1][1] + grid[2][2];
+  let somaDiag2 = grid[2][0] + grid[1][1] + grid[0][2];
+
+  console.log(somaDiag1, somaDiag2)
+
+  if (somaDiag1 === 3 || somaDiag1 === 0 || somaDiag2 === 3 || somaDiag2 === 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function verifyVelha(grid) {
+  for (let l = 0; l < grid.length; l++) {
+    for (let c = 0; c < grid[l].length; c++) {
+      if (grid[l][c] === '') {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+function createLiItemList(l, grid) {
+  let ul = document.createElement("ul");
+
+  for (let c = 0; c < grid[l].length; c++) {
+    let liItem = document.createElement("li");
+    liItem.setAttribute("id", `item_${l}-${c}`);
+    liItem.classList.add("item");
+
+    liItem.addEventListener("click", event => {
+      event.preventDefault(event);
+
+      gameState.markField(l, c);
+    });
+
+    if (grid[l][c] === 0) {
+      liItem.classList.add("iconO");
+      liItem.innerHTML = iconO;
+    } else if (grid[l][c] === 1) {
+      liItem.classList.add("iconX");
+      liItem.innerHTML = iconX;
+    }
+
+    ul.append(liItem);
+  }
+  return ul;
+}
