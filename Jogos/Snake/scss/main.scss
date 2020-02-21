@@ -1,0 +1,25 @@
+* {
+  padding: 0;
+  margin: 0;
+  outline: none;
+  list-style: none;
+}
+
+@mixin flex($width: false, $just: center, $align: center, $direction: false) {
+  @if $width {
+    width: $width;
+  }
+  display: flex;
+  justify-content: $just;
+  align-items: $align;
+  @if $direction {
+    flex-direction: $direction;
+  }
+}
+
+.wrapper {
+  position: relative;
+  height: 100vh;
+
+  @include flex(100%);
+}
