@@ -4,5 +4,24 @@ class Game {
     this.canvasSize = canvasSize;
     this.snakeColor = snakeColor;
     this.foodColor = foodColor;
+    this.direction = [0, 0];
+  }
+
+  setDirection() {
+    window.onkeypress = (event) => {
+      console.log(event.keyCode);
+    }
+  }
+
+  static run() {
+    let gameRun = setInterval(() => {
+
+    }, 300);
+
+    return gameRun;
+  }
+
+  static stop(gameRun) {
+    clearInterval(gameRun);
   }
 }
