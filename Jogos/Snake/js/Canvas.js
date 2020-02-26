@@ -2,7 +2,8 @@ class Canvas {
   constructor(width, height, canvas) {
     this.width = width;
     this.height = height;
-    this.canvas = canvas;
+    // this.canvas = canvas;
+    this.canvas = canvas.getContext("2d");
   }
 
   draw(obj) {

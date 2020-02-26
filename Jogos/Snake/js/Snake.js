@@ -1,23 +1,23 @@
 class Snake {
   constructor() {
-    this.SnakeBody = [];
+    this.snakeBody = [];
   }
 
   move(x, y) {
-    this.SnakeBody[0].move(x, y);
+    this.snakeBody[0].move(this.snakeBody[0].x + x, this.snakeBody[0].y + y);
     let lastX, lastY;
-    for (let i = 1; i < this.SnakeBody.length; i++) {
-      lastX = this.SnakeBody[i - 1].lastX;
-      lastY = this.SnakeBody[i - 1].lastY;
-      this.SnakeBody[i].move(lastX, lastY);
+    for (let i = 1; i < this.snakeBody.length; i++) {
+      lastX = this.snakeBody[i - 1].lastX;
+      lastY = this.snakeBody[i - 1].lastY;
+      this.snakeBody[i].move(lastX, lastY);
     }
   }
 
   addPieces(snakePiece) {
-    this.SnakeBody.unshift(snakePiece);
+    this.snakeBody.unshift(snakePiece);
   }
 
   resetPieces() {
-    this.SnakeBody = [];
+    this.snakeBody = [];
   }
 }
