@@ -12,8 +12,8 @@ container.style.border = "1px solid #ccc";
 
 let game = new Game(container, canvasSize, snakeColor, foodColor);
 
-let run = game.run();
+game.gameRun = game.run();
 
-// game.stop(run);
+// game.stop();
 
 console.log(game);
