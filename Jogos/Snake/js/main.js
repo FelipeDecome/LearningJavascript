@@ -8,29 +8,12 @@ container.width = canvasSize[0];
 container.height = canvasSize[1];
 container.style.border = "1px solid #ccc";
 
-let canvas = new Canvas(canvasSize[0], canvasSize[1], container);
+// let canvas = new Canvas(canvasSize[0], canvasSize[1], container);
 
-let snake = new Snake();
-let snakePiece = new SnakePiece(0, 0, snakeColor, 10);
-let snakePiece2 = new SnakePiece(0, 10, snakeColor, 10);
-let snakePiece3 = new SnakePiece(0, 20, snakeColor, 10);
-let snakePiece4 = new SnakePiece(0, 30, snakeColor, 10);
+let game = new Game(container, canvasSize, snakeColor, foodColor);
 
-snake.addPieces(snakePiece);
-snake.addPieces(snakePiece2);
-snake.addPieces(snakePiece3);
-snake.addPieces(snakePiece4);
+let run = game.run();
 
-snake.snakeBody.forEach(object => {
-  canvas.draw(object);
-});
+// game.stop(run);
 
-// setInterval(() => {
-//   snake.move(10, 0);
-//   canvas.clean();
-//   snake.snakeBody.forEach(object => {
-//     canvas.draw(object);
-//   });
-// }, 200);
-
-console.log(snake);
+console.log(game);
