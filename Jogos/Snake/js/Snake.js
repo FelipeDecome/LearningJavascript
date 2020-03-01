@@ -4,8 +4,12 @@ class Snake {
   }
 
   move(x, y) {
-    this.snakeBody[0].move(this.snakeBody[0].x + x, this.snakeBody[0].y + y);
+    let newX = this.snakeBody[0].x + x;
+    let newY = this.snakeBody[0].y + y;
     let lastX, lastY;
+
+    this.snakeBody[0].move(newX, newY);
+
     for (let i = 1; i < this.snakeBody.length; i++) {
       lastX = this.snakeBody[i - 1].lastX;
       lastY = this.snakeBody[i - 1].lastY;

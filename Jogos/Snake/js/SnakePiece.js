@@ -1,12 +1,9 @@
 class SnakePiece {
-  constructor(x, y, color, rectSize) {
+  constructor(x, y) {
     this.x = x;
     this.y = y;
     this.lastX = x;
     this.lastY = y;
-    this.width = rectSize;
-    this.height = rectSize;
-    this.color = color;
   }
 
   move(x, y) {
