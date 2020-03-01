@@ -1,19 +1,12 @@
 const containerId = "#canvas-container";
-const canvasSize = [300, 300];
+const canvasSize = [40, 40];
 const snakeColor = "#1DC6A7";
 const foodColor = "#FF3F3F";
 
-const container = document.querySelector("#canvas-container");
-container.width = canvasSize[0];
-container.height = canvasSize[1];
-container.style.border = "1px solid #ccc";
+let game = new Game(containerId, canvasSize, snakeColor, foodColor);
 
-// let canvas = new Canvas(canvasSize[0], canvasSize[1], container);
+window.onload = (e) => {
+  // console.log(e)
+  game.initGame()
+};
 
-let game = new Game(container, canvasSize, snakeColor, foodColor);
-
-game.gameRun = game.run();
-
-// game.stop();
-
-console.log(game);
