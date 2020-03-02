@@ -1,7 +1,6 @@
 class Snake {
   constructor(color) {
     this.snakeBody = []
-
     this.color = color
   }
 
@@ -25,6 +24,7 @@ class Snake {
   }
 
   resetPieces() {
+    // this.snakeBody = null
     this.snakeBody = []
   }
 }

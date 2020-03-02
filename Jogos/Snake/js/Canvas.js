@@ -11,8 +11,8 @@ class Canvas {
     this.canvas = document.querySelector(this.containerId)
     this.canvas.width = this.width
     this.canvas.height = this.height
-    this.canvas.style.width = (this.width * 20) + "px"
-    this.canvas.style.height = (this.height * 20) + "px"
+    this.canvas.style.width = (this.width * 15) + "px"
+    this.canvas.style.height = (this.height * 15) + "px"
 
     this.canvas.style.backgroundColor = "#eee";
     this.canvas.style.border = "10px solid #1DC6A7"
