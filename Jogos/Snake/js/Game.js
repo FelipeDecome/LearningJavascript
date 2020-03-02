@@ -1,6 +1,7 @@
 class Game {
   constructor(containerId, canvasSize, snakeColor, foodColor) {
     this.direction = [1, 0]
+    this.movimentDelay = 500
 
     this.containerId = containerId
     this.canvasSize = canvasSize
@@ -19,11 +20,27 @@ class Game {
     requestAnimationFrame(this.render.bind(this))
   }
 
-  stop() {
+  start() {
+    this.gameRun = requestAnimationFrame(this.render.bind(this))
+    this.move = setInterval(this.moveSnake.bind(this), this.movimentDelay)
+    this.running = 1
+
+  }
+
+  pause() {
     console.log('Parei')
 
     window.cancelAnimationFrame(this.gameRun)
     clearInterval(this.move)
+    this.running = 0
+  }
+
+  togglePlayPause() {
+    if (this.running) {
+      this.pause()
+    } else {
+      this.start()
+    }
   }
 
   initGame() {
@@ -38,13 +55,12 @@ class Game {
 
     this.snake.addPieces(this.canvasSize[0] / 2, this.canvasSize[1] / 2)
 
-    this.gameRun = requestAnimationFrame(this.render.bind(this))
-    this.move = setInterval(this.moveSnake.bind(this), 200);
+    this.start()
   }
 
   resetGame() {
     console.log('Resetando')
-    this.stop()
+    this.pause()
     this.snake.resetPieces()
     this.direction = [1, 0]
     this.initGame()
@@ -54,26 +70,19 @@ class Game {
     let sameDir;
     switch (direction) {
       case 'ArrowUp':
-        sameDir = (this.direction == [0, -1]) ? true : false
         this.direction = [0, -1]
         break
       case 'ArrowLeft':
-        sameDir = (this.direction == [-1, 0]) ? true : false
         this.direction = [-1, 0]
         break
       case 'ArrowDown':
-        sameDir = (this.direction == [0, 1]) ? true : false
         this.direction = [0, 1]
         break
       case 'ArrowRight':
-        sameDir = (this.direction == [1, 0]) ? true : false
         this.direction = [1, 0]
         break
     }
-    if (!sameDir) {
-      sameDir = true;
-      this.moveSnake()
-    }
+
   }
 
   moveSnake() {

@@ -16,7 +16,7 @@ window.onkeydown = (e) => {
   // console.log(game)
 
   if (key === "p") {
-    game.stop()
+    game.togglePlayPause()
   }
 
   game.setDirection(key)
