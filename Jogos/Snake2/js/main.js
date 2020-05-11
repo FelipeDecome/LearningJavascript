@@ -6,27 +6,43 @@ let l = console.log.bind(console);
 let $ = document.querySelector.bind(document);
 
 const game = {
-  snake: [
-    { x: 19, y: 19 },
-  ],
+  snake: {
+    body: [
+      { x: 19, y: 19 },
+    ]
+  },
   food: { x: 6, y: 8 },
-  dir: { x: 1, y: 0 }
+  dir: { x: 1, y: 0 },
+  reset: (game) => {
+    game.snake.body[0].x = 19;
+    game.snake.body[0].y = 19;
+    game.dir.x = 1;
+    game.dir.y = 0;
+  }
 }
 
 function move() {
-  let snake = game.snake;
+  let snake = game.snake.body;
   let snakeLength = snake.length;
   let dir = game.dir;
   let lastX, lastY;
 
-  if (snakeLength > 1) {
-    for (let i = 0; i < snakeLength; i++) {
-      lastX = snake[i].x;
-      lastY = snake[i].y;
+  let xT = (snake[0].x + dir.x >= 0 && snake[0].x + dir.x < 40);
+  let yT = (snake[0].y + dir.y >= 0 && snake[0].y + dir.y < 40);
+
+  if (xT && yT) {
+    if (snakeLength > 1) {
+      for (let i = 0; i < snakeLength; i++) {
+        lastX = snake[i].x;
+        lastY = snake[i].y;
+      }
+    } else {
+      snake[0].x += dir.x;
+      snake[0].y += dir.y;
     }
   } else {
-    snake[0].x += dir.x;
-    snake[0].y += dir.y;
+    game.reset(game);
+    stop();
   }
 }
 
@@ -35,11 +51,11 @@ function setDir(x, y) {
     if ((game.dir.x + x) != 0 || (game.dir.y + y) != 0) {
       game.dir.x = x;
       game.dir.y = y;
-
-      return true;
     }
+    return true;
   }
 }
+
 
 const keys = {
   "ArrowUp": () => {
@@ -82,7 +98,7 @@ function renderScreen() {
   ctx.fillRect(0, 0, 40, 40);
 
   ctx.fillStyle = "#ff4444";
-  ctx.fillRect(game.snake[0].x, game.snake[0].y, 1, 1);
+  ctx.fillRect(game.snake.body[0].x, game.snake.body[0].y, 1, 1);
 
   ctx.fillStyle = "#ccc";
   ctx.fillRect(game.food.x, game.food.y, 1, 1);
