@@ -6,7 +6,7 @@ class DateHelper {
 
   static toDate(string) {
 
-    if (!/\d{4}-\d{2}-\d{2}/.test(string)) throw new Error("Data no formato errado, a data deve ser inserida no formato 'aaaa-mm-dd'");
+    if (!/\d{4}-\d{2}-\d{2}/.test(string)) throw new Error("Data no formato errado, a data deve ser inserida no formato 'aaaa-mm-dd'" + string);
 
     return new Date(...string.split("-").map((item, ind) => item - ind % 2));
   }
