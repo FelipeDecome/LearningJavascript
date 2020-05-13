@@ -17,22 +17,48 @@ class Coifa {
     this.a = 4;
   }
 
-  calcCostas() {
-    let ch1L = this._l + 4;
-    let ch1W = this._h + 7;
-    let ch1 = ch1L + "x" + ch1W;
-
-    return ch1;
+  getCostas() {
+    let chL = this._l + 4;
+    let chW = this._h + 7;
+    return `${Math.ceil(chL)} x ${Math.ceil(chW)}`;
   }
 
-  calcLateral(type, size) {
+  getLateral(type, size) {
+    let bSup;
+
     if (type == "tubo") {
-      let bSup = size + 5;
-      let cat1 = (this._l - bSup) / 2;
-      let cat2 = this._h - this._bh;
-      let hip = Math.sqrt(Math.pow(cat1, 2) + Math.pow(cat2, 2));
+      bSup = size + 5;
 
-      console.log(hip);
+    } else if (type == "base") {
+      bSup = size;
     }
+
+    let cat1 = (this._l - bSup) / 2;
+    let cat2 = this._h - this._bh;
+
+    let chL = this._w + 2;
+    let chW = MathHelper.pitagoras(cat1, cat2) + this._bh + 7;
+    return `${Math.ceil(chL)} x ${Math.ceil(chW)}`;
+
   }
+
+  getFrente(type, size) {
+    let bSup;
+
+    if (type == "tubo") {
+      bSup = size + 5;
+
+    } else if (type == "base") {
+      bSup = size;
+    }
+
+    let cat1 = this._w - bSup;
+    let cat2 = this._h - this._bh;
+
+    let chL = this._w + 4;
+    let chW = MathHelper.pitagoras(cat1, cat2) + this._bh + 7;
+
+    return `${Math.ceil(chL)} x ${Math.ceil(chW)}`;
+  }
+
 }
