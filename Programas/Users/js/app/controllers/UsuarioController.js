@@ -1,6 +1,6 @@
 class UsuarioController {
-  constructor(dadosUsuario) {
-    this._dadosUsuario;
+  constructor() {
+
   }
 
   adciona() {

@@ -8,10 +8,53 @@
 
   <body>
     <form action="">
-      <input type="tel" name="tel" id="tel" />
+      <div class="input-group">
+        <label for="nome">Nome</label>
+        <input type="text" name="nome" id="nome" required />
+      </div>
+      <div class="input-group">
+        <label for="tel">Telefone</label>
+        <input type="text" name="tel" id="tel" required />
+      </div>
+      <div>
+        <label for="pessoa1">Física</label>
+        <input type="radio" name="pessoa" id="pessoa1" required />
+
+        <label for="pessoa2">Jurídica</label>
+        <input type="radio" name="pessoa" id="pessoa2" required />
+      </div>
+      <div class="input-group">
+        <label for="rgcnpj">RG ou CNPJ</label>
+        <input type="text" name="rgcnpj" id="rgcnpj" required />
+      </div>
+      <div class="input-group">
+        <label for="cep">Cep</label>
+        <input type="endereco" name="cep" id="cep" required />
+
+        <label for="rua">Rua</label>
+        <input type="endereco" name="rua" id="rua" required />
+
+        <label for="numero">Número</label>
+        <input type="endereco" name="numero" id="numero" required />
+
+        <label for="bairro">Bairro</label>
+        <input type="endereco" name="bairro" id="bairro" required />
+
+        <label for="cidade">Cidade</label>
+        <input type="endereco" name="cidade" id="cidade" required />
+
+        <label for="estado">Estado</label>
+        <select name="estado" id="estado" required>
+          <optgroup>
+            <option value="sp">São Paulo</option>
+            <option value="mg">Minas Gerais</option>
+          </optgroup>
+        </select>
+      </div>
     </form>
 
     <script src="js/index.js"></script>
+    <script src="js/app/controllers/FormController.js"></script>
     <script src="js/app/helpers/TelefoneHelper.js"></script>
   </body>
 </html>
