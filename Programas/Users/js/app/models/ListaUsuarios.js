@@ -11,4 +11,8 @@ class ListaUsuario {
     return [].concat(this._usuarios);
   }
 
+  limpa() {
+    this._usuarios = [];
+  }
+
 }

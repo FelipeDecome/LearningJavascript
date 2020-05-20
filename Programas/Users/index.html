@@ -3,31 +3,92 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/bootstrap.css" />
+
+    <style>
+      body {
+        display: flex;
+        height: 100vh;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+
     <title>Document</title>
   </head>
 
-  <body>
-    <form action="">
-      <div class="input-group">
-        <label for="nome">Nome</label>
-        <input type="text" name="nome" id="nome" required />
-      </div>
-      <div class="input-group">
-        <label for="tel">Telefone</label>
-        <input type="text" name="tel" id="tel" required />
-      </div>
-      <div>
-        <label for="pessoa1">Física</label>
-        <input type="radio" name="pessoa" id="pessoa1" required />
+  <body class="container">
+    <form class="form col-sm-6" onsubmit="usuarioController.adiciona()">
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="nome">Nome</label>
+        <div class="col-sm-4">
+          <input
+            class="form-control"
+            type="text"
+            name="nome"
+            id="nome"
+            required
+          />
+        </div>
 
-        <label for="pessoa2">Jurídica</label>
-        <input type="radio" name="pessoa" id="pessoa2" required />
+        <label class="col-sm-2 col-form-label" for="tel">Telefone</label>
+        <div class="col-sm-4">
+          <input
+            class="form-control"
+            type="text"
+            name="tel"
+            id="tel"
+            required
+          />
+        </div>
       </div>
-      <div class="input-group">
-        <label for="rgcnpj">RG ou CNPJ</label>
-        <input type="text" name="rgcnpj" id="rgcnpj" required />
+      <div class="row">
+        <div class="form-check col-sm-3">
+          <label class="form-check-label" for="pessoa1">Física</label>
+          <input
+            class="form-check-input"
+            type="radio"
+            name="pessoa"
+            id="pessoa1"
+            required
+          />
+          <label class="form-check-label" for="pessoa2">Jurídica</label>
+          <input
+            class="form-check-input"
+            type="radio"
+            name="pessoa"
+            id="pessoa2"
+            required
+          />
+        </div>
+        <div class="form-group col-sm-9">
+          <label class="col-sm-3 col-form-label" for="rgcnpj">RG ou CNPJ</label>
+          <div class="col-sm-9">
+            <input
+              class="form-control"
+              type="text"
+              name="rgcnpj"
+              id="rgcnpj"
+              required
+            />
+          </div>
+        </div>
       </div>
-      <div class="input-group">
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="end">Endereço</label>
+        <div class="col-sm-10">
+          <input
+            class="form-control"
+            type="text"
+            name="end"
+            id="end"
+            required
+          />
+        </div>
+      </div>
+
+      <!-- <div class="input-group">
         <label for="cep">Cep</label>
         <input type="endereco" name="cep" id="cep" required />
 
@@ -50,11 +111,17 @@
             <option value="mg">Minas Gerais</option>
           </optgroup>
         </select>
-      </div>
+      </div> -->
+      <button type="submit">Enviar</button>
     </form>
 
     <script src="js/index.js"></script>
+    <script src="js/app/controllers/UsuarioController.js"></script>
     <script src="js/app/controllers/FormController.js"></script>
     <script src="js/app/helpers/TelefoneHelper.js"></script>
+
+    <script>
+      let usuarioController = new UsuarioController();
+    </script>
   </body>
 </html>
