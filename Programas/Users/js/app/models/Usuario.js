@@ -1,10 +1,9 @@
 class Usuario {
-  constructor(nome, tel, pes, numReg, end) {
+  constructor(nome, tel, rgcnpj, end) {
     this._nome = nome;
-    this._tel = tel;
-    this._pes = pes;
-    this._numReg = numReg;
-    this._end = end;
+    this._tel = tel; //[]
+    this._rgcnpj = rgcnpj;
+    this._end = end; //[]
   }
 
   get nome() {
@@ -15,12 +14,8 @@ class Usuario {
     return [].concat(this._tel);
   }
 
-  get pes() {
-    return this._pes;
-  }
-
-  get numReg() {
-    return this._numReg;
+  get rgcnpj() {
+    return this._rgcnpj;
   }
 
   get end() {
