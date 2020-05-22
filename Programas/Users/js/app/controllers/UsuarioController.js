@@ -15,7 +15,7 @@ class UsuarioController {
 
     console.log(this);
 
-    this._getFormData();
+    this._getData();
 
     this._limpaForm;
   }
@@ -28,11 +28,11 @@ class UsuarioController {
   }
 
   _criaUsuario() {
-    this._usuario = new Usuario(...DataHelper.prepare(this._data));
+    this._usuario = new Usuario(...DataHelper.prepare(this._getData()));
   }
 
-  _getFormData() {
-    this._data = {
+  _getData() {
+    return {
       nome: this._nome.value,
       tel: TelefoneHelper.valida(this._tel.value),
       rgcnpj: this._rgcnpj.value,
