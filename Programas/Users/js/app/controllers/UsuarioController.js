@@ -2,7 +2,7 @@ class UsuarioController {
   constructor() {
     let $ = document.querySelector.bind(document);
 
-    this._nome = $("#nome");
+    this._nome = $("#name");
     this._tel = $("#tel");
     this._rgcnpj = $("#rgcnpj");
     this._end = $("#end");
@@ -15,9 +15,9 @@ class UsuarioController {
 
     console.log(this);
 
-    this._getData();
+    DataHelper.prepare(this._getData());
 
-    this._limpaForm;
+    this._limpaForm();
   }
 
   _limpaForm() {

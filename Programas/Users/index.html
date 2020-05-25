@@ -1,40 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
 
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
 
-    <script
-      src="https://kit.fontawesome.com/67895c6c28.js"
-      crossorigin="anonymous"
-    ></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
 
-    <style>
-      body {
-        height: 100vh;
-        display: flex;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-      }
-    </style>
-  </head>
+  <script src="https://kit.fontawesome.com/67895c6c28.js" crossorigin="anonymous"></script>
 
-  <body>
-    <div class="container-fluid">
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
       <div class="col-md-3">
         <div class="card">
           <div class="card-header">
@@ -42,164 +36,90 @@
           </div>
 
           <div class="card-body">
-            <form
-              class="form col-sm-12"
-              onsubmit="usuarioController.adiciona()"
-            >
+            <form class="form col-sm-12" onsubmit="usuarioController.adiciona()">
               <div class="form-group">
                 <div class="row">
                   <label for="name" class="control-label col-lg-3">Nome</label>
-                  <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    class="form-control col-lg-7"
-                  />
+                  <input type="text" name="name" id="name" class="form-control col-lg-8" />
                 </div>
               </div>
 
               <div class="form-group">
                 <div class="row">
-                  <label for="tel" class="control-label col-lg-3"
-                    >Telefone</label
-                  >
-                  <input
-                    type="text"
-                    name="tel"
-                    id="tel"
-                    class="form-control col-lg-7"
-                  />
+                  <label for="tel" class="control-label col-lg-3">Telefone</label>
+                  <input type="text" name="tel" id="tel" class="form-control col-lg-8" />
                 </div>
               </div>
 
               <div class="form-group">
                 <div class="row">
-                  <label for="rgcnpj" class="control-label col-lg-3"
-                    >Rg ou Cnpj</label
-                  >
-                  <input
-                    type="text"
-                    name="rgcnpj"
-                    id="rgcnpj"
-                    class="form-control col-lg-7"
-                  />
+                  <label for="rgcnpj" class="control-label col-lg-4">Rg ou Cnpj</label>
+                  <input type="text" name="rgcnpj" id="rgcnpj" class="form-control col-lg-7" />
                 </div>
               </div>
 
               <div class="form-group">
                 <div class="row">
-                  <label for="end" class="control-label col-lg-3"
-                    >Endereço</label
-                  >
-                  <input
-                    type="text"
-                    name="end"
-                    id="end"
-                    class="form-control col-lg-9"
-                  />
+                  <label for="end" class="control-label col-lg-3">Endereço</label>
+                  <input type="text" name="end" id="end" class="form-control col-lg-8" />
                 </div>
               </div>
 
-              <div class="row">
-                <div class="form-group">
-                  <button type="submit" class="btn btn-primary">
-                    Enviar
-                  </button>
-                </div>
+              <div class="text-center my-2 ">
+                <button type="submit" class="btn btn-primary btn-block">
+                  Enviar
+                </button>
               </div>
             </form>
           </div>
         </div>
       </div>
-      <div class="col-md-9"></div>
-    </div>
-
-    <!-- <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="card">
-            <h1 class="text-center">Usuários</h1>
-
-            <form class="form" onsubmit="usuarioController.adiciona()">
-              <div class="row">
-                <div class="col-sm-4">
-                  <label for="name" class="control-label">Nome</label>
-                  <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    class="form-control"
-                  />
-                </div>
-
-                <div class="col-sm-4">
-                  <label for="tel" class="control-label">Telefone</label>
-                  <input type="text" name="tel" id="tel" class="form-control" />
-                </div>
-
-                <div class="col-sm-4">
-                  <label for="rgcnpj" class="control-label">Rg ou Cnpj</label>
-                  <input
-                    type="text"
-                    name="rgcnpj"
-                    id="rgcnpj"
-                    class="form-control"
-                  />
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="form-group col-sm-12">
-                  <label for="end" class="control-label">Endereço</label>
-                  <input type="text" name="end" id="end" class="form-control" />
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="form-group col-sm-12">
-                  <button type="submit" class="btn btn-primary">
-                    Enviar
-                  </button>
-                </div>
-              </div>
-            </form>
+      <div class="col-md-9">
+        <div class="card">
+          <div class="card-header">
+            <h2>Lista de Usuários</h2>
           </div>
-        </div>
-
-        <div class="col-sm-9">
-          <div class="col-sm-3">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Isabelle Dominos</h5>
-                <p class="card-text text-info">
-                  Cadastro Aprovado.
-                </p>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Isabelle Dominos</h5>
+                    <p class="card-text text-info">
+                      Cadastro Aprovado.
+                    </p>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">(19)3893-4121</li>
+                    <li class="list-group-item">462.293.438-86</li>
+                    <li class="list-group-item">
+                      Rua do trabalhador, 15. Jardim Triunfo. Pedreira-sp
+                    </li>
+                  </ul>
+                </div>
               </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">(19)3893-4121</li>
-                <li class="list-group-item">462.293.438-86</li>
-                <li class="list-group-item">
-                  Rua do trabalhador, 15. Jardim Triunfo. Pedreira-sp
-                </li>
-              </ul>
             </div>
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
+  </div>
 
-    <script src="js/index.js"></script>
+  <script src="js/index.js"></script>
 
-    <script src="js/app/models/Usuario.js"></script>
-    <script src="js/app/models/ListaUsuarios.js"></script>
+  <script src="js/app/models/Usuario.js"></script>
+  <script src="js/app/models/ListaUsuarios.js"></script>
 
-    <script src="js/app/controllers/UsuarioController.js"></script>
+  <script src="js/app/controllers/UsuarioController.js"></script>
 
-    <script src="js/app/helpers/Helpers.js"></script>
-    <script src="js/app/helpers/TelefoneHelper.js"></script>
+  <script src="js/app/helpers/Helpers.js"></script>
+  <script src="js/app/helpers/DataHelper.js"></script>
+  <script src="js/app/helpers/TelefoneHelper.js"></script>
 
-    <script>
-      let usuarioController = new UsuarioController();
-    </script>
-  </body>
+  <script>
+    let usuarioController = new UsuarioController();
+
+  </script>
+</body>
+
 </html>

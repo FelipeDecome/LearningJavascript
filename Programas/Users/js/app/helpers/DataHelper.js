@@ -1,8 +1,9 @@
-class DataHelper {
+class DataHelper extends Helpers {
 
   static prepare(data) {
 
     let array = Object.values(data);
+    console.log(array);
   }
 
   _validName() {
