@@ -13,20 +13,18 @@ class UsuarioController {
       new UsuariosView($("#usuarios")),
       "adiciona");
 
-    this._mensagem = new Mensagem();
-
-    this._mensagemView = new MensagemView($("#mensagem"));
-    this._mensagemView.update(this._mensagem);
+    this._mensagem = new Bind(
+      new Mensagem(),
+      new MensagemView($("#mensagem")),
+      "texto");
 
   }
 
   adiciona() {
 
     event.preventDefault();
-
+    this._listaUsuarios.adiciona(this._criaUsuario());
     this._mensagem.texto = "Usuário adicionado com sucesso.";
-    this._mensagemView.update(this._mensagem);
-
     this._limpaForm();
   }
 
