@@ -1,9 +1,9 @@
-class ListaUsuario {
+class ListaUsuarios {
   constructor() {
     this._usuarios = [];
   }
 
-  adciona(usuario) {
+  adiciona(usuario) {
     this._usuarios.push(usuario);
   }
 

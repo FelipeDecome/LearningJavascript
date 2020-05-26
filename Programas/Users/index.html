@@ -28,6 +28,9 @@
 
 <body>
   <div class="container-fluid">
+
+    <div id="mensagem"></div>
+
     <div class="row">
       <div class="col-md-3">
         <div class="card">
@@ -53,8 +56,8 @@
 
               <div class="form-group">
                 <div class="row">
-                  <label for="rgcnpj" class="control-label col-lg-4">Rg ou Cnpj</label>
-                  <input type="text" name="rgcnpj" id="rgcnpj" class="form-control col-lg-7" />
+                  <label for="cpfcnpj" class="control-label col-lg-4">CPF ou CNPJ</label>
+                  <input type="text" name="cpfcnpj" id="cpfcnpj" class="form-control col-lg-7" />
                 </div>
               </div>
 
@@ -74,47 +77,27 @@
           </div>
         </div>
       </div>
-      <div class="col-md-9">
-        <div class="card">
-          <div class="card-header">
-            <h2>Lista de Usuários</h2>
-          </div>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-md-3">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Isabelle Dominos</h5>
-                    <p class="card-text text-info">
-                      Cadastro Aprovado.
-                    </p>
-                  </div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item">(19)3893-4121</li>
-                    <li class="list-group-item">462.293.438-86</li>
-                    <li class="list-group-item">
-                      Rua do trabalhador, 15. Jardim Triunfo. Pedreira-sp
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="col-md-9" id="usuarios"></div>
     </div>
   </div>
 
   <script src="js/index.js"></script>
 
+  <script src="js/app/controllers/UsuarioController.js"></script>
+
   <script src="js/app/models/Usuario.js"></script>
   <script src="js/app/models/ListaUsuarios.js"></script>
-
-  <script src="js/app/controllers/UsuarioController.js"></script>
+  <script src="js/app/models/Mensagem.js"></script>
 
   <script src="js/app/helpers/Helpers.js"></script>
   <script src="js/app/helpers/DataHelper.js"></script>
-  <script src="js/app/helpers/TelefoneHelper.js"></script>
+  <script src="js/app/helpers/Bind.js"></script>
+
+  <script src="js/app/views/View.js"></script>
+  <script src="js/app/views/UsuariosView.js"></script>
+  <script src="js/app/views/MensagemView.js"></script>
+
+  <script src="js/app/services/ProxyFactory.js"></script>
 
   <script>
     let usuarioController = new UsuarioController();

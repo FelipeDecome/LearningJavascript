@@ -1,42 +1,55 @@
 class UsuarioController {
   constructor() {
+
     let $ = document.querySelector.bind(document);
 
     this._nome = $("#name");
     this._tel = $("#tel");
-    this._rgcnpj = $("#rgcnpj");
+    this._cpfcnpj = $("#cpfcnpj");
     this._end = $("#end");
+
+    this._listaUsuarios = new Bind(
+      new ListaUsuarios(),
+      new UsuariosView($("#usuarios")),
+      "adiciona");
+
+    this._mensagem = new Mensagem();
+
+    this._mensagemView = new MensagemView($("#mensagem"));
+    this._mensagemView.update(this._mensagem);
 
   }
 
   adiciona() {
+
     event.preventDefault();
-    //adciona novo usuário na lista
 
-    console.log(this);
-
-    DataHelper.prepare(this._getData());
+    this._mensagem.texto = "Usuário adicionado com sucesso.";
+    this._mensagemView.update(this._mensagem);
 
     this._limpaForm();
   }
 
   _limpaForm() {
+
     this._nome.value = '';
     this._tel.value = '';
-    this._rgcnpj.value = '';
+    this._cpfcnpj.value = '';
     this._end.value = '';
   }
 
   _criaUsuario() {
-    this._usuario = new Usuario(...DataHelper.prepare(this._getData()));
+
+    return this._usuario = new Usuario(...this._getDataArray());
   }
 
-  _getData() {
-    return {
-      nome: this._nome.value,
-      tel: TelefoneHelper.valida(this._tel.value),
-      rgcnpj: this._rgcnpj.value,
-      end: this._end.value
-    }
+  _getDataArray() {
+
+    return [
+      DataHelper.validName(this._nome.value),
+      DataHelper.validTel(this._tel.value),
+      DataHelper.validCpfCnpj(this._cpfcnpj.value),
+      DataHelper.validEnd(this._end.value)
+    ];
   }
 }

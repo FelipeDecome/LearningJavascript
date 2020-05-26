@@ -4,6 +4,8 @@ class Usuario {
     this._tel = tel; //[]
     this._rgcnpj = rgcnpj;
     this._end = end; //[]
+
+    Object.freeze(this);
   }
 
   get nome() {
