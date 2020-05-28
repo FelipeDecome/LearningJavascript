@@ -3,57 +3,62 @@ class NegociacoesService {
     this._http = new HttpService();
   }
 
+  obterNegociacoes() {
+
+    return Promise.all([
+        this.obterNegociacoesSemana(),
+        this.obterNegociacoesSemanaAnterior(),
+        this.obterNegociacoesSemanaRetrasada()
+      ])
+      .then(periodos =>
+        periodos.reduce((dados, periodo) => dados.concat(periodo), []))
+      .catch(erro => {
+        throw new Erro(erro);
+      });
+  }
+
   obterNegociacoesSemana() {
 
-    return new Promise((resolve, reject) => {
-
-      this._http
-        .get('negociacoes/semana')
-        .then(negociacoes => {
-          console.log(negociacoes);
-          resolve(negociacoes.map(obj =>
-            new Negociacao(new Date(obj.data), obj.quantidade, obj.valor)));
-        })
-        .catch(erro => {
-          console.log(erro);
-          reject("Não foi possível importar as negociações da semana.");
-        });
-    });
+    return this._http
+      .get('negociacoes/semana')
+      .then(negociacoes => {
+        console.log(negociacoes);
+        return negociacoes.map(obj =>
+          new Negociacao(new Date(obj.data), obj.quantidade, obj.valor));
+      })
+      .catch(erro => {
+        console.log(erro);
+        throw new Error("Não foi possível importar as negociações da semana.");
+      });
   }
 
   obterNegociacoesSemanaAnterior() {
 
-    return new Promise((resolve, reject) => {
-
-      this._http
-        .get('negociacoes/anterior')
-        .then(negociacoes => {
-          console.log(negociacoes);
-          resolve(negociacoes.map(obj =>
-            new Negociacao(new Date(obj.data), obj.quantidade, obj.valor)));
-        })
-        .catch(erro => {
-          console.log(erro);
-          reject("Não foi possível importar as negociações da semana anterior.");
-        });
-    });
+    return this._http
+      .get('negociacoes/anterior')
+      .then(negociacoes => {
+        console.log(negociacoes);
+        return negociacoes.map(obj =>
+          new Negociacao(new Date(obj.data), obj.quantidade, obj.valor));
+      })
+      .catch(erro => {
+        console.log(erro);
+        throw new Error("Não foi possível importar as negociações da semana anterior.");
+      });
   }
 
   obterNegociacoesSemanaRetrasada() {
 
-    return new Promise((resolve, reject) => {
-
-      this._http
-        .get('negociacoes/retrasada')
-        .then(negociacoes => {
-          console.log(negociacoes);
-          resolve(negociacoes.map(obj =>
-            new Negociacao(new Date(obj.data), obj.quantidade, obj.valor)));
-        })
-        .catch(erro => {
-          console.log(erro);
-          reject("Não foi possível importar as negociações da semana retrasada.");
-        });
-    });
+    return this._http
+      .get('negociacoes/retrasada')
+      .then(negociacoes => {
+        console.log(negociacoes);
+        return negociacoes.map(obj =>
+          new Negociacao(new Date(obj.data), obj.quantidade, obj.valor));
+      })
+      .catch(erro => {
+        console.log(erro);
+        throw new Error("Não foi possível importar as negociações da semana retrasada.");
+      });
   }
 }
