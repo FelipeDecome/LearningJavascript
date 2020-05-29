@@ -24,4 +24,14 @@ class ListaNegociacoes {
 
     return this._negociacoes.reduce((t, n) => t + n.volume, 0.0);
   }
+
+  sort(prop) {
+
+    this._negociacoes.sort((a, b) => a[prop] - b[prop]);
+  }
+
+  sortInverse() {
+
+    this._negociacoes.reverse();
+  }
 }

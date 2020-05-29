@@ -6,9 +6,13 @@ class DateHelper {
 
   static toDate(string) {
 
-    if (!/\d{4}-\d{2}-\d{2}/.test(string)) throw new Error("Data no formato errado, a data deve ser inserida no formato 'aaaa-mm-dd'" + string);
+    if (!/\d{2}\/\d{2}\/\d{4}/.test(string)) throw new Error("Data no formato errado, a data deve ser inserida no formato 'dd/mm/aaaa'.");
 
-    return new Date(...string.split("-").map((item, ind) => item - ind % 2));
+    return new Date(
+      ...string.split("/")
+      .reverse()
+      .map((item, ind) => item - ind % 2)
+    );
   }
 
   static toString(date) {

@@ -30,6 +30,7 @@
   </form>
 
   <script src="js/app/helpers/DateHelper.js"></script>
+  <script src="js/app/services/HttpService.js"></script>
   <script>
     const $ = document.querySelector.bind(document);
 
@@ -45,36 +46,37 @@
         valor: $("#valor").value
       };
 
-      clearFields();
-      console.log(obj);
-
-      //construir o json
-      let json = JSON.stringify(obj);
-      console.log(json);
-
       //enviar o XMLHttpRequest
-      let xhr = new XMLHttpRequest();
+      new HttpService()
+        .post('/negociacoes', obj)
+        .then(resultado => {
+          console.log(resultado)
+          clearFields();
+        })
+        .catch(erro => console.log(erro));
 
-      xhr.open('POST', '/negociacoes', true);
+      // let xhr = new XMLHttpRequest();
 
-      xhr.setRequestHeader('Content-type', 'application/json');
+      // xhr.open('POST', '/negociacoes', true);
 
-      xhr.onreadystatechange = () => {
+      // xhr.setRequestHeader('Content-type', 'application/json');
 
-        if (xhr.readyState == 4) {
+      // xhr.onreadystatechange = () => {
 
-          if (xhr.status == 200) {
+      //   if (xhr.readyState == 4) {
 
-            console.log("success", xhr.responseText);
+      //     if (xhr.status == 200) {
 
-          } else {
+      //       console.log("success", xhr.responseText);
 
-            console.log("fail", xhr.responseText);
-          }
-        }
-      };
+      //     } else {
 
-      xhr.send(json);
+      //       console.log("fail", xhr.responseText);
+      //     }
+      //   }
+      // };
+
+      // xhr.send(JSON.stringfy(obj));
     }
 
     function clearFields() {
