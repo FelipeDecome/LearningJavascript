@@ -3,7 +3,7 @@ class Canvas {
     this._tile = tile;
     this._canvas = canvas;
     this._ctx = this._canvas.getContext("2d");
-    this._canvasColor = "#222";
+    this._color = "#222";
     this._snakeColor = "lime";
     this._foodColor = "red";
 
@@ -13,17 +13,31 @@ class Canvas {
 
   _drawCanvas() {
 
-    this._ctx.fillStyle = this._canvasColor;
+    this._ctx.fillStyle = this._color;
     this._ctx.fillRect(0, 0, this._canvas.width, this._canvas.height);
   }
 
   drawSnake(obj) {
 
-    this._ctx.fillStyle = this._snakeColor;
-    this._ctx.fillRect(obj.x * this._tile, obj.y * this._tile, obj.size, obj.size);
+    this._drawCanvas();
+
+    this._ctx.fillStyle = obj.color;
+    for (let i = 0; i < obj.trail.length; i++) {
+
+      this._ctx.fillRect(
+        obj.trail[i].x * this._tile,
+        obj.trail[i].y * this._tile,
+        obj.size,
+        obj.size
+      );
+
+      if (obj.trail[i].x == obj.x && obj.trail[i].y == obj.y) {
+        obj.resetSnake();
+      }
+    }
   }
 
-  drawFood(obj) {
+  drawFood(obj, snake) {
 
   }
 }

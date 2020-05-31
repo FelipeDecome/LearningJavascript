@@ -17,12 +17,12 @@ class BordersObserver {
 
     if (model.y < 0) {
 
-      model.y = 0;
+      model.y = this._tile - 1;
     }
 
     if (model.y > this._tile - 1) {
 
-      model.y = this._tile - 1;
+      model.y = 0;
     }
   }
 }

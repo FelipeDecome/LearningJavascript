@@ -6,6 +6,8 @@ class Snake {
     this._x = 9;
     this._y = 9;
 
+    this._color = "lime";
+
     this._tail = 5;
     this._trail = [];
 
@@ -22,9 +24,19 @@ class Snake {
     return this._y;
   }
 
+  get trail() {
+
+    return [].concat(this._trail);
+  }
+
   get size() {
 
     return this._size;
+  }
+
+  get color() {
+
+    return this._color;
   }
 
   set x(newX) {
@@ -37,9 +49,14 @@ class Snake {
     this._y = newY;
   }
 
+  set tail(newT) {
+
+    this._tail = newT;
+  }
+
   move(dir) {
-    this._x = this._x + dir.x;
-    this._y = this._y + dir.y;
+    this._x += dir.x;
+    this._y += dir.y;
 
     this._notifyObs();
   }
@@ -47,11 +64,18 @@ class Snake {
   moveTail() {
     this._trail.push({
       x: this._x,
-      y: this.y
+      y: this._y
     });
-    while (this._trail > tail) {
+    while (this._trail.length > this._tail) {
       this._trail.shift();
     }
+  }
+
+  resetSnake() {
+    this._x = 9;
+    this._y = 9;
+
+    this._tail = 5;
   }
 
   addObs(o) {
