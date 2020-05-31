@@ -1,14 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
 
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <body>
-    <canvas id="c"></canvas>
-  </body>
-  <script src="js/main.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <canvas id="c" width="400" height="400"></canvas>
+</body>
+<script src="js/app/controller/GameController.js"></script>
+
+<script src="js/app/models/Snake.js"></script>
+
+<script src="js/app/helpers/KeyboardHelper.js"></script>
+<script src="js/app/helpers/BordersObserver.js"></script>
+
+<script src="js/app/views/Canvas.js"></script>
+
+<script>
+  const game = new GameController();
+
+  game.start();
+
+</script>
+
 </html>
