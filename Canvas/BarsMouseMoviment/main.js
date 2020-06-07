@@ -6,14 +6,6 @@ const mouse = {
   y: 0
 }
 
-addEventListener('mousemove', (evt) => {
-
-  mouse.x = evt.x;
-  mouse.y = evt.y;
-
-
-});
-
 let bar = document.createElement('li');
 bar.style.backgroundColor = "#333";
 bar.style.width = "100px";
@@ -23,19 +15,23 @@ let barAfter = document.createElement('span');
 
 barAfter.setAttribute('class', 'bar__after');
 
-barAfter.addEventListener('mousemove', (evt) => {
+addEventListener('mousemove', (evt) => {
 
-  console.log(evt.clientX, barAfter.offsetLeft + barAfter.clientWidth / 2);
+  mouse.x = evt.x;
+  mouse.y = evt.y;
 
+  if (isInside(barAfter)) {
+    console.log('ola');
+  }
 });
 
 bar.appendChild(barAfter);
 
 barContainer.appendChild(bar);
 
-function valueToPercentage(value, max) {
+function isInside(element) {
 
   // max = 100
   // value = x
-  return (value * 100) / max;
+  return (mouse.x > element.offsetLeft && mouse.x < (element.offsetLeft + element.clientWidth));
 }
