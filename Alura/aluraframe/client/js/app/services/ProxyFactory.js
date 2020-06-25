@@ -1,5 +1,10 @@
 class ProxyFactory {
 
+  constructor() {
+
+    throw new Error('A classe ProxyFactory não pode ser instanciada')
+  }
+
   static create(object, props, action) {
 
     return new Proxy(object, {
