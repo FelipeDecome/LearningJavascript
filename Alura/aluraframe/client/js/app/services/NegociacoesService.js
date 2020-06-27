@@ -12,8 +12,9 @@ class NegociacoesService {
       .then((periodos) =>
         periodos.reduce((dados, periodo) => dados.concat(periodo), [])
       )
-      .catch((erro) => {
-        throw new Erro(erro);
+      .catch((e) => {
+        console.log(e);
+        throw new Error("Não foi possível importar as negociações");
       });
   }
 
@@ -96,17 +97,13 @@ class NegociacoesService {
   }
 
   importa(listaAtual) {
-    return this.obterNegociacoes()
-      .then((negociacoes) =>
-        negociacoes.filter(
-          (negociacao) =>
-            !listaAtual.negociacoes.some((negociacaoExistente) =>
-              negociacao.isEquals(negociacaoExistente)
-            )
-        )
+    return this.obterNegociacoes().then((negociacoes) =>
+      negociacoes.filter(
+        (negociacao) =>
+          !listaAtual.negociacoes.some((negociacaoExistente) =>
+            negociacao.isEquals(negociacaoExistente)
+          )
       )
-      .catch((e) => {
-        throw new Error(e);
-      });
+    );
   }
 }
