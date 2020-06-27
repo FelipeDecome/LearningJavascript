@@ -1,13 +1,10 @@
 class Negociacao {
-
   constructor(data, quantidade, valor) {
-
     this._data = new Date(data.getTime());
     this._quantidade = quantidade;
     this._valor = valor;
 
     Object.freeze(this);
-
   }
 
   get volume() {
@@ -26,4 +23,7 @@ class Negociacao {
     return this._valor;
   }
 
+  isEquals(outraNegociacao) {
+    return JSON.stringify(this) === JSON.stringify(outraNegociacao);
+  }
 }
