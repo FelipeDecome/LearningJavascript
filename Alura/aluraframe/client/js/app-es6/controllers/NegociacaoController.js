@@ -1,3 +1,15 @@
+import ListaNegociacoes from "./../models/ListaNegociacoes.js";
+import NegociacoesView from "./../views/NegociacoesView.js";
+import Negociacao from "./../models/Negociacao.js";
+
+import Mensagem from "./../models/Mensagem.js";
+import MensagemView from "./../Views/MensagemView.js";
+
+import Bind from "./../helpers/Bind.js";
+import DateHelper from "./../helpers/DateHelper.js";
+
+import NegociacoesService from "./../services/NegociacoesService.js";
+
 class NegociacaoController {
   constructor() {
     let $ = document.querySelector.bind(document);
@@ -107,4 +119,9 @@ class NegociacaoController {
 
     this._inputData.focus();
   }
+}
+
+const negociacaoController = new NegociacaoController();
+export default function currentInstance() {
+  return negociacaoController;
 }

@@ -1,5 +1,5 @@
-class Mensagem {
-  constructor(texto = '') {
+export default class Mensagem {
+  constructor(texto = "") {
     this._texto = texto;
   }
 

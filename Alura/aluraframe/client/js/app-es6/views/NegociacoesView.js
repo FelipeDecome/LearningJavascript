@@ -1,6 +1,15 @@
-class NegociacoesView extends View {
+import View from "./View.js";
+import DateHelper from "./../helpers/DateHelper.js";
+import currentInstance from "./../controllers/NegociacaoController.js";
+
+export default class NegociacoesView extends View {
   constructor(elemento) {
     super(elemento);
+
+    elemento.addEventListener("click", (e) => {
+      if (e.target.nodeName == "TH")
+        currentInstance().sort(event.target.textContent.toLowerCase());
+    });
   }
 
   template(model) {
@@ -8,15 +17,17 @@ class NegociacoesView extends View {
     <table class="table table-hover table-bordered">
     <thead>
       <tr>
-        <th onclick="negociacaoController.sort('data')">DATA</th>
-        <th onclick="negociacaoController.sort('quantidade')">QUANTIDADE</th>
-        <th onclick="negociacaoController.sort('valor')">VALOR</th>
-        <th onclick="negociacaoController.sort('volume')">VOLUME</th>
+        <th>DATA</th>
+        <th>QUANTIDADE</th>
+        <th>VALOR</th>
+        <th>VOLUME</th>
       </tr>
     </thead>
 
     <tbody>
-      ${model.negociacoes.map(n => `
+      ${model.negociacoes
+        .map(
+          (n) => `
 
           <tr>
             <td>${DateHelper.toString(n.data)}</td>
@@ -25,7 +36,9 @@ class NegociacoesView extends View {
             <td>${n.volume}</td>
           </tr>
 
-      `).join("")}
+      `
+        )
+        .join("")}
     </tbody>
 
     <tfoot>

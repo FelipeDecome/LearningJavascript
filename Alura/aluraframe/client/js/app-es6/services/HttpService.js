@@ -1,4 +1,4 @@
-class HttpService {
+export default class HttpService {
   _handleErrors(res) {
     console.log(res.statusText);
     if (!res.ok) throw new Error(res.statusText);

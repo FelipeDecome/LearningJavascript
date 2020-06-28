@@ -1,74 +1,60 @@
-var ConnectionFactory = (function () {
+const stores = ["negociacoes"];
+const version = 3;
+const dbName = "aluraframe";
 
-  const stores = ['negociacoes']
-  const version = 3
-  const dbName = 'aluraframe'
+let connection = null;
+let close = null;
 
-  var connection = null
-  var close = null
+export default class ConnectionFactory {
+  constructor() {
+    throw new Error("A classe ConnectionFactory não pode ser instanciada");
+  }
 
-  return class ConnectionFactory {
+  static getConnection() {
+    return new Promise((resolve, reject) => {
+      let openRequest = window.indexedDB.open(dbName, version);
 
-    constructor() {
+      openRequest.onupgradeneeded = (e) => {
+        ConnectionFactory._createStores(e.target.result);
+      };
 
-      throw new Error('A classe ConnectionFactory não pode ser instanciada')
-    }
-
-    static getConnection() {
-
-      return new Promise((resolve, reject) => {
-
-        let openRequest = window.indexedDB.open(dbName, version)
-
-        openRequest.onupgradeneeded = e => {
-
-          ConnectionFactory._createStores(e.target.result)
+      openRequest.onsuccess = (e) => {
+        if (!connection) {
+          connection = e.target.result;
+          close = connection.close.bind(connection);
+          connection.close = () => {
+            throw new Error(
+              "A conexão não deve ser fechada diretamente, use o método closeConnection"
+            );
+          };
         }
 
-        openRequest.onsuccess = e => {
+        resolve(connection);
+      };
 
-          if (!connection) {
+      openRequest.onerror = (e) => {
+        console.log(e.target.error);
+        reject(e.target.error.name);
+      };
+    });
+  }
 
-            connection = e.target.result
-            close = connection.close.bind(connection)
-            connection.close = () => {
+  static _createStores(connection) {
+    stores.forEach((store) => {
+      if (connection.objectStoreNames.contains(store))
+        // Implementar código para salvar os dados antes de deletar
+        connection.deleteObjectStore(store);
 
-              throw new Error('A conexão não deve ser fechada diretamente, use o método closeConnection')
-            }
-          }
+      connection.createObjectStore(store, {
+        autoIncrement: true,
+      });
+    });
+  }
 
-          resolve(connection)
-        }
-
-        openRequest.onerror = e => {
-
-          console.log(e.target.error)
-          reject(e.target.error.name)
-        }
-      })
-    }
-
-    static _createStores(connection) {
-
-      stores.forEach(store => {
-
-        if (connection.objectStoreNames.contains(store))
-          // Implementar código para salvar os dados antes de deletar
-          connection.deleteObjectStore(store)
-
-        connection.createObjectStore(store, {
-          autoIncrement: true
-        })
-      })
-    }
-
-    static closeConnection() {
-
-      if (connection) {
-
-        close()
-        close = null
-      }
+  static closeConnection() {
+    if (connection) {
+      close();
+      close = null;
     }
   }
-})()
+}
